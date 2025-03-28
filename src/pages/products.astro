@@ -1,0 +1,13 @@
+---
+import Loader from "@/components/Loader.astro";
+import ProductList from "@/components/ProductList.astro";
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout>
+    <ProductList server:defer>
+        <div slot="fallback" class="mt-20 grid place-items-center">
+            <Loader />
+        </div>
+    </ProductList>
+</Layout>
