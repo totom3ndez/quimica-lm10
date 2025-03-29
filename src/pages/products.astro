@@ -2,12 +2,16 @@
 import Loader from "@/components/Loader.astro";
 import ProductList from "@/components/ProductList.astro";
 import Layout from "@/layouts/Layout.astro";
+import ProductAside from "@/components/ProductAside.astro";
 ---
 
 <Layout>
-    <ProductList server:defer>
-        <div slot="fallback" class="mt-20 grid place-items-center">
-            <Loader />
-        </div>
-    </ProductList>
+    <div class="min-h-[100vh] flex mt-20">
+        <ProductAside />
+        <ProductList server:defer category={Astro.url.searchParams.get('category')}>
+            <div slot="fallback" class="mt-20 grid place-items-center">
+                <Loader />
+            </div>
+        </ProductList>
+    </div>
 </Layout>
