@@ -1,39 +1,15 @@
 ---
 import ProductCard from "@/components/ProductCard.astro";
-import { getProducts } from "@/api/getProducts";
-import { storedList } from "@/store";
+import { getCollection } from 'astro:content';
 
-interface Product {
-  name: string;
-  desc: string;
-  price: number;
-}
-
-let list: Product[] = [];
-const fetchProductData = async (): Promise<Product[]> => {
-  try {
-    if (storedList.value.length > 0) {
-      console.log("Using cached data.");
-      list = storedList.value;
-    }
-    console.log("Fetching data from the API...");
-    const { data } = await getProducts();
-    storedList.set(data);
-    list = storedList.value;
-    return list;
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    return []; // Return an empty list in case of an error
-  }
-};
-
-await fetchProductData();
+const products = await getCollection('products');
+const category = Astro.props.category;
 ---
 
-<div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+<div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 w-full">
   {
-    list.map(({ name, desc, price }: Product) => (
-      <ProductCard name={name} desc={desc} price={price} />
+    products.filter((product) => !category || product.data.category === category).map(({data}) => (
+      <ProductCard name={data.name} desc={data.desc} price={data.price} id={data.id} category={data.category} />
     ))
   }
 </div>
