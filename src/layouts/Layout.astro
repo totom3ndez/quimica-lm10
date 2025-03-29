@@ -1,5 +1,6 @@
 ---
 import Header from "@/components/Header.astro";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
@@ -11,6 +12,7 @@ import Header from "@/components/Header.astro";
 		<meta name="generator" content={Astro.generator} />
 		<link rel="stylesheet" href="/src/styles/global.css" />
 		<title>Quimica LM10</title>
+		<ClientRouter />
 	</head>
 	<body class="container max-w-[1200px] mx-auto">
 		<Header />
