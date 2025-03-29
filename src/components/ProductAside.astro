@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+
+const categories = await getCollection('products', ({ data }) => data.category); // Get all categories
+const uniqueCategories = [...new Set(categories.map(({ data }) => data.category))]; // Get unique categories
+---
+
+<aside class="w-1/4">
+    <h2 class="text-2xl font-bold mb-4">Categorias</h2>
+    <ul class="flex flex-col gap-2">
+        <li><a href="/products">Todos</a></li> <!-- Get all products -->
+        {
+            uniqueCategories.map((category) => (
+                <li><a href={`/products?category=${category}`}>{category.charAt(0).toUpperCase() + category.slice(1)}</a></li> // Dynamic categories filter
+            ))
+        }
+    </ul>
+</aside>
