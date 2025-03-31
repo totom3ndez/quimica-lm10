@@ -4,6 +4,7 @@ import { IoMdCart } from "react-icons/io";
 
 import productImage from '../../public/productos.jpeg';
 import { Image } from "astro:assets";
+import Button from "./Button.astro";
 ---
 
 <div class="flex flex-col overflow-hidden border border-gray-300 rounded-lg min-h-2xl">
@@ -16,10 +17,9 @@ import { Image } from "astro:assets";
         </div>
         <div class="flex justify-between items-center">
             <p class="text-gray-600 text-lg font-bold">{price.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}</p>
-            <button
-                class="cursor-pointer rounded-lg flex gap-2 px-2 py-1 items-center bg-black text-white"
-                ><IoMdCart /> Add to cart </button
-            >
+            <Button text="Add to cart" class="cursor-pointer rounded-lg flex gap-2 px-2 py-1 items-center bg-black text-white">
+                <IoMdCart slot="icon" />
+            </Button>
         </div>
     </div>
 </div>
